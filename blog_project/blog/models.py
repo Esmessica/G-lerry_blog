@@ -26,6 +26,16 @@ class Post(models.Model):
         return self.comments.filter(approved_comment=True)
         # filter comments to be approved then show them
 
+    def get_absolute_url(self):
+        # has to have the get_Absolute_url name
+        return reverse('post_detail', kwargs={'pk': self.pk})
+
+    """ 
+        The primary key patches to self.pk, after i create post, and i hit publication, 
+        go to post detail of the primary key of post i just created
+        
+    """
+
     def __str__(self):
         return self.title
 
@@ -39,11 +49,20 @@ class Comments(models.Model):
     create_date = models.DateTimeField(default=timezone.now())
     # Automatically set date for today, now
     approved_comment = models.BooleanField(default=False)
-    # By default, says approved comment is not approved, it should be the same name as in approve_comments functions return
+    # By default, says approved comment is not approved,
+    # it should be the same name as in approve_comments functions return
 
     def approve(self):
         self.approved_comment = True
         self.save()
+
+    def get_absolute_url(self):
+        return reverse('post_list')
+
+    """
+        After post comment, go back to list of all posts,
+        comment has to be approved before being there
+    """
 
     def __str__(self):
         return self.text
