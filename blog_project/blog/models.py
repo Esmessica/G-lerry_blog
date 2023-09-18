@@ -23,8 +23,27 @@ class Post(models.Model):
         # published date is now
 
     def approve_comments(self):
-        return self.comments.filter(approved_comments=True)
+        return self.comments.filter(approved_comment=True)
         # filter comments to be approved then show them
 
     def __str__(self):
         return self.title
+
+
+class Comments(models.Model):
+    post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
+    # Connected to blog Post key, name is set up to comments, connect each comment to actual post in future
+    author = models.CharField(max_length=100)
+    # not the same author as in Post class
+    text = models.TextField()
+    create_date = models.DateTimeField(default=timezone.now())
+    # Automatically set date for today, now
+    approved_comment = models.BooleanField(default=False)
+    # By default, says approved comment is not approved, it should be the same name as in approve_comments functions return
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
