@@ -112,7 +112,7 @@ def comment_approve(request, pk):
 @login_required
 def comment_remove(request, pk):
     comment =get_object_or_404(Comments, pk=pk)
-    post_pk = comment.post.pk       #needs to be saved as variable before delete, otherwise it won't be stored
+    post_pk = comment.post.pk       # needs to be saved as variable before delete, otherwise it won't be stored
     comment.delete()
     return redirect('post_detail', pk=post_pk)
 
