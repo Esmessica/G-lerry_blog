@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Comments
 from blog.forms import PostForm, CommentsForm
 from django.urls import reverse_lazy
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
+from
 
 # Create your views here.
 
@@ -66,3 +69,50 @@ class DraftListView(LoginRequiredMixin, ListView):
     """
     Creates query to make sure those posts does not have any published date
     """
+
+
+"""
+Comments views here
+"""
+
+@login_required
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish
+    return redirect('post_detail', pk=pk)
+
+
+@login_required
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post,pk=pk)
+    if request.method == 'POST':
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = CommentsForm()
+    return render(request, 'blog/comments_form.html', {'form':form})
+
+"""
+Request and pk links comment to post, get post object or 404 page, pass in post model
+If someone  submited the form, form is equal to CommentsForm.
+If form is valid, save,comment.post make it equal to t he post field
+else just return comment html
+"""
+
+@login_required()
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comments, pk=pk)
+    comment.approve()       # function from models.py
+    return redirect('post_detail', pk=comment.post.pk)
+
+@login_required
+def comment_remove(request, pk):
+    comment =get_object_or_404(Comments, pk=pk)
+    post_pk = comment.post.pk       #needs to be saved as variable before delete, otherwise it won't be stored
+    comment.delete()
+    return redirect('post_detail', pk=post_pk)
+
