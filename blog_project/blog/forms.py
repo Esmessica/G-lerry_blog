@@ -21,7 +21,7 @@ class PostForm(forms.ModelForm):
 
 class CommentsForm(forms.ModelForm):
 
-    class Meta()
+    class Meta():
         model = Comments
         fields = ('author', 'text')
         # Fields that you should be able to edit while commenting

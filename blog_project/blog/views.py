@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
-from
+
 
 # Create your views here.
 
@@ -65,7 +65,7 @@ class DraftListView(LoginRequiredMixin, ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__isnull=True).order_by('created_date')
+        return Post.objects.filter(published_date__isnull=True).order_by('create_date')
     """
     Creates query to make sure those posts does not have any published date
     """

@@ -2,28 +2,28 @@
 
 {% block content %}
 
-<div class="bg-secondary">
-    <h2>Please login:</h2>
-    <h3>(Must be a SuperUser, please check with the site admin)</h3>
+    <div class="bg-secondary">
+        <h2>Please login:</h2>
+        <h3>(Must be a SuperUser, please check with the site admin)</h3>
 
-    {% if form.eroors %}
-        <p>Username and password did not match. Please try again.</p>
-    {% endif %}
+        {% if form.eroors %}
+            <p>Username and password did not match. Please try again.</p>
+        {% endif %}
 
-    <!--
-    If form has error it shows this part of site,
-    in form tag we don't need 'blog:' becouse templates folder is not at project level
-    -->
+        <!--
+        If form has error it shows this part of site,
+        in form tag we don't need 'blog:' becouse templates folder is not at project level
+        -->
 
-    <form method="POST" action="{% url 'login' %}">
-        {% csrf_token %}
-            {% form.as_p %}
-        <input type="submit" value="Login" class="btn btn-primary">
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+                {{ form.as_p }}
+            <input type="submit" value="Login" class="btn btn-primary">
 
-        <input type="hidden" name="next" value="{{ next }}"> <!-- next is getting supplied by login view -->
+            <input type="hidden" name="next" value="{{ next }}"> <!-- next is getting supplied by login view -->
 
-    </form>
+        </form>
 
-</div>
+    </div>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block content %}
     <h1>New Post</h1>
     <form class="post-form" method="post">
-        {% crsf_token %}
+        {% csrf_token %}
 
         {{form.as_p}}
 
