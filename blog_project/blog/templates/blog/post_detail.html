@@ -7,12 +7,12 @@
             {{post.published_date}}
         </div>
         {% else %}
-        <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        <a class="btn btn-secondary" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
 
         {% endif %}
 
     <p class="post-content">
-        {{ post.title|safe|linebreaksbr }}
+        {{ post.text|safe|linebreaksbr }}
     </p>
     <!--  The title|safe takes care so our edited text does look
         like we want to in text editor after we publish it, bold is bold etc
@@ -33,8 +33,8 @@
             {% if user.is_authenticated or comment.approved_comment %}
 
                 {{comment.created_date}}
-                {% if not comment.approve_comment %}
-                    <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
+                {% if not comment.approved_comment %}
+                    <a class="btn btn-secondary" href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
                     <a class="btn btn-danger" href="{% url 'comment_approve' pk=comment.pk %}">Add comment</a>
                 {% endif %}
 

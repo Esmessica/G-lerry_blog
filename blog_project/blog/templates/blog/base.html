@@ -29,12 +29,12 @@
 
 <body>
     <!-- navbar -->
-    <nav class="navbar  laro-font custom-navbar">
+    <nav class="nav justify-content-cente">
           <div class="container">
             <ul class="nav navbar-nav">
                 <li><a class="navbar-brand big-brand" href="{% url 'post_list' %}">
-                  <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                  G-lerry
+                <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo G-lerry" width="30" height="24" class="d-inline-block align-text-top">
+
                 </a></li>
 
                 <li>
@@ -45,17 +45,18 @@
                     <a class="nav-link" href="https://www.artforum.com/news"> Art forum news</a>
                 </li>
 
-                <ul class="nav navbar-nav navbar-right">
+
+                <nav class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'post_new' %}">New post</a></li>
-                            <li><a href="{% url 'post_draft_list' %}">Drafts</a></li>
-                            <li><a href="{% url 'logout' %}">Log Out</a></li>
-                            <li><a >Welcome: {{ user.username }}</a></li>
+                            <a class="nav-item" href="{% url 'post_new' %}">New post</a>
+                            <a class="nav-item" href="{% url 'post_draft_list' %}">Drafts</a>
+                            <a class="nav-item" href="{% url 'logout' %}">Log Out</a>
+                            <p class="nav-item" >Welcome: {{ user.username }}</p>
 
                         {% else %}
-                            <li><a href="{% url 'login' %}" class="nav navbar-right">Login</a> </li>
+                            <a href="{% url 'login' %}" class="nav navbar-right nav-item">Login</a>
                         {% endif %}
-                </ul>
+                </nav>
 
             </ul>
 
