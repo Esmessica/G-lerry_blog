@@ -1,4 +1,18 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
+    <h1>New Post</h1>
+    <form class="post-form" method="post">
+        {% crsf_token %}
+
+        {{form.as_p}}
+
+        <button type="submit" class="save btn btn-default" name="button">Save</button>
+    </form>
+
+<!--editable is class in form.py for medium editor -->
+<script>
+    var editor = new MediumEditor('.editable');
+</script>
+
 {% endblock %}
