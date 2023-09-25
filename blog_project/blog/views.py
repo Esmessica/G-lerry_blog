@@ -53,7 +53,6 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
-
     model = Post
     success_url = reverse_lazy('post_list')
 
@@ -103,16 +102,18 @@ If form is valid, save,comment.post make it equal to t he post field
 else just return comment html
 """
 
-@login_required()
+
+@login_required
 def comment_approve(request, pk):
     comment = get_object_or_404(Comments, pk=pk)
     comment.approve()       # function from models.py
     return redirect('post_detail', pk=comment.post.pk)
 
+
 @login_required
 def comment_remove(request, pk):
-    comment =get_object_or_404(Comments, pk=pk)
-    post_pk = comment.post.pk       # needs to be saved as variable before delete, otherwise it won't be stored
+    comment = get_object_or_404(Comments, pk=pk)
+    post_pk = comment.post.pk
     comment.delete()
     return redirect('post_detail', pk=post_pk)
 
