@@ -21,8 +21,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Patrick+Hand&family=Poppins:wght@300;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <title>G-lerry blog</title>
 
 </head>
@@ -31,38 +30,37 @@
     <!-- navbar -->
     <nav class="navbar fixed-top navbar-expand-lg  glerry-nav">
           <div class="container-fluid">
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                         <span class="navbar-toggler-icon"></span>
-                    </button>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li><a class="navbar-brand big-brand" href="{% url 'post_list' %}">
-                <img src="/static/images/glerry-logo.png" alt="Logo G-lerry" width="120" class="d-inline-block align-text-top">
+                <img src="/static/images/glerry-logo.png" alt="Logo G-lerry" width="150" class="logo-glerry d-inline-block align-text-top">
 
                 </a></li>
 
-                <li>
-                    <a class="nav-link" href="{% url 'about' %}">About</a>
-                </li>
+                    <li>
+                        <a class="nav-link customlink" href="{% url 'about' %}">About</a>
+                    </li>
 
-                <li>
-                    <a class="nav-link" href="https://www.artforum.com/news"> Art forum news</a>
-                </li>
+                    <li>
+                        <a class="nav-link customlink" href="https://www.artforum.com/news"> Art forum news</a>
+                    </li>
 
-                <!--dropdown added-->
-                {% if user.is_authenticated %}
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'post_new' %}">New post</a>
-                            <a class="dropdown-item" href="{% url 'post_draft_list' %}">Drafts</a>
-                            <a class="dropdown-item change-logout" href="{% url 'logout' %}">Logout</a>
-                            <hr class="dropdown-divider">
-                            <p class="dropdown-item welcome-user" >Welcome: {{ user.username }}</p>
-                        </ul>
-                  </li>
-                {% else %}
-                    <a href="{% url 'login' %}" class="nav navbar-right nav-item">Login</a>
-                {% endif %}
+                    <!--dropdown added-->
+                    {% if user.is_authenticated %}
+
+                          <li class="nav-item dropdown customlink">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item customlink-drop" href="{% url 'post_new' %}">New post</a>
+                                    <a class="dropdown-item customlink-drop" href="{% url 'post_draft_list' %}">Drafts</a>
+                                    <a class="dropdown-item change-logout customlink-drop" href="{% url 'logout' %}">Logout</a>
+                                    <hr class="dropdown-divider">
+                                    <p class="dropdown-item welcome-user customlink-drop-user" >Welcome: {{ user.username }}</p>
+                                </ul>
+                          </li>
+
+                    {% else %}
+                        <a href="{% url 'login' %}" class="nav navbar-right nav-item customlink customlogin">Login</a>
+                    {% endif %}
 
 
             </ul>
