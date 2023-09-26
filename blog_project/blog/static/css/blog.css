@@ -11,7 +11,16 @@
 .content{
     margin-top: 5rem;
 }
+
 .postcontent{
     background: #dee0e7;
     border: 1px solid #a99bbb;
+}
+
+.glerry-nav{
+    background-image: url('/static/images/glerry2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
 }
