@@ -67,3 +67,49 @@
     font-family: 'Playfair Display', serif;
     font-style: italic;
 }
+
+.comment-one{
+    border: 1px solid #dee0e7;
+    margin: 1rem 0;
+    background-color: #f0ebf2;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.bigger-text{
+    font-size: 2rem;
+}
+
+/* buttons */
+
+.button-container{
+    display: flex; /* Use flexbox to layout items in a row */
+    justify-content: space-between; /* Distribute space between the buttons */
+}
+
+.button-post{
+    text-decoration: none;
+    color: white;
+    background: #787878;
+    text-align: center;
+    margin: 1rem 1rem;
+    padding: 0.5rem 0;
+    width: 15vw;
+    transition: background-color 0.3s, box-shadow 0.3s; /
+}
+
+.button-post:hover{
+   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+}
+
+.editbtn {
+    background-color: #6c756b;
+}
+
+.removebtn {
+    background-color: #7a6363;
+}
+
+.deletebtn{
+    background-color: #8f3b3b;
+    width: 10vw;
+}

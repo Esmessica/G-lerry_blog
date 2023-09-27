@@ -17,35 +17,36 @@
     <!--  The title|safe takes care so our edited text does look
         like we want to in text editor after we publish it, bold is bold etc
         html will call br if there's break-->
-
+        <div class="button-container">
         {% if user.is_authenticated %}
-            <a class="btn btn-secondary" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
-            <a class="btn btn-danger" href="{% url 'post_delete' pk=post.pk %}">Remove</a>
+            <a class="button-post editbtn " href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+            <a class="button-post removebtn" href="{% url 'post_delete' pk=post.pk %}">Remove</a>
 
         {% endif %}
-            <hr>
-            <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn btn-secondary">Add comment</a>
 
+            <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="button-post addcmntbtn">Add comment</a>
+        </div>
 
-        <div class="container">
+        <div class="container comment-section">
             {% for comment in post.comments.all %}
-            <br>
-            {% if user.is_authenticated or comment.approved_comment %}
+            <div class="comment-one">
+                <br>
+                {% if user.is_authenticated or comment.approved_comment %}
 
-                {{comment.created_date}}
-                {% if not comment.approved_comment %}
-                    <a class="btn btn-secondary" href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
-                    <a class="btn btn-danger" href="{% url 'comment_approve' pk=comment.pk %}">Add comment</a>
+                    {{comment.created_date}}
+                    {% if not comment.approved_comment %}
+                        <a class="btn btn-secondary" href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
+                        <a class="btn btn-danger" href="{% url 'comment_approve' pk=comment.pk %}">Add comment</a>
+                    {% endif %}
+
+                <p>{{comment.text|safe|linebreaks}}</p>
+                <p>Posted by: {{ comment.author }}</p>
+            </div>
                 {% endif %}
 
-            <p>{{comment.text|safe|linebreaks}}</p>
-            <p>Posted by: {{ comment.author }}</p>
+                {% empty %}
 
-            {% endif %}
-
-            {% empty %}
-
-                <p>No comments</p>
+                    <p>No comments</p>
 
             {% endfor %}
 

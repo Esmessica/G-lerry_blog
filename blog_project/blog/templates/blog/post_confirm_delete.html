@@ -3,8 +3,8 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    <p>Are you sure you want to delete {{ object }}?</p>
+    <p class="bigger-text py-4">Are you sure you want to delete {{ object }} post?</p>
     <!-- the 'object' is created automatically by deleting -->
-    <input type="submit" class="btn btn-danger" value="Confirm">
+    <input type="submit" class="button-post deletebtn" value="Confirm">
 </form>
 {% endblock %}
