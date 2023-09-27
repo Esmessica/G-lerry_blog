@@ -2,13 +2,21 @@
 
 {% block content %}
 
-{% for post in posts %}
+
+{% if object_list %}
+{% for post in object_list %}
+
 <div class="post">
     <p class="date">Created: {{ post.create_date|date:'d-m-Y' }}</p>
     <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a> </h1>
-    <p>{{ post.text|truncatechars:200 }}</p>
+    <p>{{ post.text|truncatechars:200|safe }}</p>
 </div>
 <!-- loops through all posts, takes their date , title as link to that post and then shows its text but only first 200 chars-->
 {% endfor %}
+{% else %}
+
+    <p>not workin</p>
+
+{% endif %}
 
 {% endblock %}

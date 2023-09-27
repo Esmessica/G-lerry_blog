@@ -62,12 +62,27 @@ class DraftListView(LoginRequiredMixin, ListView):
     login_url = 'login/'
     redirect_field_name = 'blog/post_list.html'
     model = Post
+    template_name = 'blog/post_draft_list.html'
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__isnull=True).order_by('create_date')
+        return Post.objects.filter(published_date__isnull=True).order_by('-create_date')
     """
     Creates query to make sure those posts does not have any published date
     """
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        print("Queryset count:", queryset.count())  # Print the count of the queryset
+        return super().get(request, *args, **kwargs)
+
+    """
+    If we wanted to fetch data not using default value object_list,
+    we can use code below to change that hwo we like
+    """
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['posts'] = context['object_list']
+    #     return context
 
 
 """
