@@ -43,12 +43,11 @@
                     <li>
                         <a class="nav-link customlink" href="https://www.artforum.com/news"> Artforum news</a>
                     </li>
-
                     <!--dropdown added-->
                     {% if user.is_authenticated %}
 
                           <li class="nav-item dropdown customlink">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">User</a>
                                 <ul class="dropdown-menu">
                                     <a class="dropdown-item customlink-drop" href="{% url 'post_new' %}">New post</a>
                                     <a class="dropdown-item customlink-drop" href="{% url 'post_draft_list' %}">Drafts</a>
