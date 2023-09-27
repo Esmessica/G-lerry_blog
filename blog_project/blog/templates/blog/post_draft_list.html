@@ -10,12 +10,13 @@
     <p class="date">Created: {{ post.create_date|date:'d-m-Y' }}</p>
     <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a> </h1>
     <p>{{ post.text|truncatechars:200|safe }}</p>
+    <!-- the |safe ensures that it's shown as text without tags -->
 </div>
 <!-- loops through all posts, takes their date , title as link to that post and then shows its text but only first 200 chars-->
 {% endfor %}
 {% else %}
 
-    <p>not workin</p>
+    <p class="bigger-text">There are no posts in drafts.</p>
 
 {% endif %}
 

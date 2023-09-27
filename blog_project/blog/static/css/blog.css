@@ -79,6 +79,12 @@
     font-size: 2rem;
 }
 
+.login-form{
+    background-color: #ebebeb;
+    padding: 2rem;
+    margin:0;
+}
+
 /* buttons */
 
 .button-container{
@@ -112,4 +118,8 @@
 .deletebtn{
     background-color: #8f3b3b;
     width: 10vw;
+}
+
+.loginbtn{
+    margin: 2rem 0;
 }

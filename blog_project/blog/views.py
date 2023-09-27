@@ -3,6 +3,7 @@ from blog.models import Post, Comments
 from blog.forms import PostForm, CommentsForm
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
@@ -10,6 +11,13 @@ from django.views.generic import (TemplateView, ListView, DetailView, CreateView
 
 # Create your views here.
 
+class CustomLogoutView(LogoutView):
+    template_name = 'registration/logout.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        # Add any additional logic you want here
+        return response
 
 class AboutView(TemplateView):
     template_name = 'about.html'
