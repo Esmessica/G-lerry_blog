@@ -8,7 +8,7 @@
 
 <div class="post">
     <p class="date">Created: {{ post.create_date|date:'d-m-Y' }}</p>
-    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a> </h1>
+    <h1><a class="post-list-content" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a> </h1>
     <p>{{ post.text|truncatechars:200|safe }}</p>
     <!-- the |safe ensures that it's shown as text without tags -->
 </div>
