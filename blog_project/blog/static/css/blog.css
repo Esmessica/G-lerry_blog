@@ -46,7 +46,7 @@
 
 .customlink-drop-user{
     font-size: 2rem;
-    background-color: #e4dfe8 ;
+    background-color: #efebf2;
 }
 
 .text-long{
@@ -85,11 +85,33 @@
     margin:0;
 }
 
+.post-content{
+    margin: 1rem 0;
+    border-top: 3px solid #ebebeb;
+
+}
+
+/* post list page */
+
+.post-list-content{
+    color: #161716;
+}
+
+.post{
+    background-color: #efebf2;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+
 /* buttons */
 
 .button-container{
-    display: flex; /* Use flexbox to layout items in a row */
-    justify-content: space-between; /* Distribute space between the buttons */
+    display: flex;
+    justify-content: space-between;
+    border-top: 3px solid #ebebeb;
+    margin: 1rem 0;
+    padding: 1rem 0;
 }
 
 .button-post{
