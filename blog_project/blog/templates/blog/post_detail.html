@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-
+{% load static %}
 {% block content %}
     <h1 class="post-title"> {{ post.title }} </h1>
         {% if post.published_date %}
@@ -27,30 +27,21 @@
             <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="button-post addcmntbtn">Add comment</a>
         </div>
 
-        <div class="container comment-section">
-            {% for comment in post.comments.all %}
+   <div class="container comment-section">
+        {% for comment in post.comments.all %}
             <div class="comment-one">
                 <br>
-                {% if user.is_authenticated or comment.approved_comment %}
+                <p>{{ comment.text|safe|linebreaks }}</p>
+                <p class="posted-by">Posted by: {{ comment.author }}</p>
 
-                    {{comment.created_date}}
-                    {% if not comment.approved_comment %}
-                        <a class="comment-b button-post removebtn href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
-                        <a class="comment-b button-post editbtn" href="{% url 'comment_approve' pk=comment.pk %}">Add comment</a>
-                    {% endif %}
-
-                <p>{{comment.text|safe|linebreaks}}</p>
-                <p>Posted by: {{ comment.author }}</p>
+                <span class="likes-text" id="likeCount_{{ comment.pk }}">Likes: {{ comment.likes }}</span>
+                <button class="button-post likebtn" onclick="likeComment({{ comment.pk }})">Like</button>
             </div>
-                {% endif %}
+        {% endfor %}
+    </div>
 
-                {% empty %}
 
-                    <p>No comments</p>
-
-            {% endfor %}
-
-        </div>
+<script src="{% static 'js/comments.js' %}"></script>
 
 
 {% endblock %}

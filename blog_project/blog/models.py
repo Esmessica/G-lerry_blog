@@ -50,6 +50,11 @@ class Comments(models.Model):
     approved_comment = models.BooleanField(default=False)
     # By default, says approved comment is not approved,
     # it should be the same name as in approve_comments functions return
+    likes = models.PositiveIntegerField(default=0)
+
+    def increment_likes(self):
+        self.likes += 1
+        self.save()
 
     def approve(self):
         self.approved_comment = True

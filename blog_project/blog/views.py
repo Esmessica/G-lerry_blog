@@ -7,8 +7,10 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
-
-
+# v for like functionality
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 class CustomLogoutView(LogoutView):
@@ -92,10 +94,16 @@ class DraftListView(LoginRequiredMixin, ListView):
     #     context['posts'] = context['object_list']
     #     return context
 
-
 """
 Comments views here
 """
+@csrf_exempt
+@require_POST
+def like_comment(request, pk):
+    comment = get_object_or_404(Comments, pk=pk)
+    comment.increment_likes()
+    likes_count = comment.likes
+    return JsonResponse({'likes': likes_count})
 
 @login_required
 def post_publish(request, pk):

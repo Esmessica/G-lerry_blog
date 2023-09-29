@@ -92,6 +92,11 @@
 
 }
 
+.likes-text{
+    margin-top: 2rem;
+    color: #787878;
+}
+
 /* post list page */
 
 .post-list-content{
@@ -103,6 +108,8 @@
     padding: 1rem;
     margin: 1rem 0;
 }
+
+
 
 
 /* buttons */
@@ -149,4 +156,10 @@
 
 .comment-b{
     padding: 0.5rem 1rem;
+}
+
+.likebtn{
+    width: 5rem;
+    background-color: #676e97;
+    margin-left: 50vw;
 }
