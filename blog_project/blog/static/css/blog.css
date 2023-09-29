@@ -93,7 +93,11 @@
 }
 
 .likes-text{
-    margin-top: 2rem;
+    margin: 2rem 0 0 1rem;
+    color: #787878;
+}
+
+.posted-by{
     color: #787878;
 }
 
