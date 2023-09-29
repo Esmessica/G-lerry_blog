@@ -49,11 +49,18 @@
                           <li class="nav-item dropdown customlink">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">User</a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item customlink-drop" href="{% url 'post_new' %}">New post</a>
+                                    <a class="dropdown-item customlink-drop" href="{% url 'post_new' %}">New post </a>
                                     <a class="dropdown-item customlink-drop" href="{% url 'post_draft_list' %}">Drafts</a>
                                     <a class="dropdown-item change-logout customlink-drop" href="{% url 'logout' %}">Logout</a>
-                                    <hr class="dropdown-divider">
-                                    <p class="dropdown-item welcome-user customlink-drop-user" >Welcome: {{ user.username }}</p>
+                                        {% if user.is_superuser %}
+                                            <a class="dropdown-item customlink-drop" href="{% url 'admin:index' %}">Admin ✎</a>
+                                            <hr class="dropdown-divider">
+                                            <p class="dropdown-item welcome-user customlink-drop-user" >Welcome: {{ user.username }} 👑</p>
+                                        {% else %}
+                                             <hr class="dropdown-divider">
+                                            <p class="dropdown-item welcome-user customlink-drop-user" >Welcome: {{ user.username }}</p>
+                                        {% endif %}
+
                                 </ul>
                           </li>
 
