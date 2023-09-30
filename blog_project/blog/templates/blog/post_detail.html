@@ -20,7 +20,7 @@
         like we want to in text editor after we publish it, bold is bold etc
         html will call br if there's break-->
         <div class="button-container">
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and post.author == user %}
             <a class="button-post editbtn " href="{% url 'post_edit' pk=post.pk %}">Edit</a>
             <a class="button-post removebtn" href="{% url 'post_delete' pk=post.pk %}">Remove</a>
 
