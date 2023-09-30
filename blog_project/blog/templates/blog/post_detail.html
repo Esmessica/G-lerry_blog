@@ -4,6 +4,8 @@
     <h1 class="post-title"> {{ post.title }} </h1>
         {% if post.published_date %}
         <div class="date postdate">
+            Author: {{ post.author }}
+            <br>
             {{post.published_date}}
         </div>
         {% else %}
