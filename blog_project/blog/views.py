@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Comments
-from blog.forms import PostForm, CommentsForm
+from blog.forms import PostForm, CommentsForm, RegisterForm
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.contrib.auth.views import LogoutView
@@ -12,6 +12,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
+from django.contrib import messages
+from django.contrib.auth import login
 
 class CustomLogoutView(LogoutView):
     template_name = 'registration/logout.html'
@@ -94,9 +96,29 @@ class DraftListView(LoginRequiredMixin, ListView):
     #     context['posts'] = context['object_list']
     #     return context
 
+
+def sign_up(request):
+    if request.method == 'GET':
+        form = RegisterForm()
+        return render(request, 'registration/register.html', {'form': form})
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            messages.success(request, 'You have singed up successfully.')
+            login(request, user)
+            return redirect('post_list')
+        else:
+            return render(request, 'registration/register.html', {'form': form})
+
+
 """
 Comments views here
 """
+
+
 @csrf_exempt
 @require_POST
 def like_comment(request, pk):

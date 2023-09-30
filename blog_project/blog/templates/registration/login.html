@@ -2,9 +2,8 @@
 
 {% block content %}
 
-    <div class="login-form">
+    <div class="login-form new_user">
         <h2>Please login:</h2>
-        <h3>* Must be a content creator. To become one of creators, send email to admin@g-lerry.com</h3>
 
         {% if form.eroors %}
             <p>Username and password did not match. Please try again.</p>
@@ -18,11 +17,13 @@
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
                 {{ form.as_p }}
-            <input type="submit" value="Login" class="button-post loginbtn">
+            <input class="button-post loginbtn" type="submit" value="Login" >
 
             <input type="hidden" name="next" value="{{ next }}"> <!-- next is getting supplied by login view -->
 
         </form>
+
+    <h3>* New user? <a class="register" href="{% url 'register' %}">Register</a> here! </h3>
 
     </div>
 
