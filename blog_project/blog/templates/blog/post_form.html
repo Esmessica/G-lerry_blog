@@ -11,6 +11,11 @@
         <button type="submit" class="save button-post editbtn" name="button">Save</button>
     </form>
 
+<script>
+    var name= "{{ user.id }}";
+    document.getElementById("username_field").value = name;
+</script>
+
 <!--editable is class in form.py for medium editor -->
 <script>
     var editor = new MediumEditor('.editable');

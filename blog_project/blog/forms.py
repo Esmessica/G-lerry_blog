@@ -12,8 +12,9 @@ class PostForm(forms.ModelForm):
         # Fields that you should be able to edit while doin posts
 
         widgets = {
-                'title':forms.TextInput(attrs={'class':'textinputclass'}),
-                'text':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'})
+                'author': forms.TextInput(attrs={'class': 'textinputclass', 'value': '', 'id': 'username_field', 'type':'hidden'}),
+                'title': forms.TextInput(attrs={'class': 'textinputclass'}),
+                'text': forms.Textarea(attrs={'class': 'editable medium-editor-textarea postcontent'})
         }
 
         """
