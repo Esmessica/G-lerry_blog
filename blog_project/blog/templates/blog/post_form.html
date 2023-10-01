@@ -6,6 +6,7 @@
         {% csrf_token %}
 
         {{form.as_p}}
+        {{form.media}}
 
         <button type="submit" class="save button-post editbtn" name="button">Save</button>
     </form>

@@ -15,6 +15,7 @@
 .postcontent{
     background: #dee0e7;
     border: 1px solid #a99bbb;
+    min-height: 10rem;
 }
 
 .glerry-nav{
