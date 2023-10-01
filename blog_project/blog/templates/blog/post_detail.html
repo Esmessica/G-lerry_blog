@@ -35,7 +35,7 @@
                 <br>
                 <p>{{ comment.text|safe|linebreaks }}</p>
                 <p class="posted-by">Posted by: {{ comment.author }}</p>
-
+                    {{ comment.approve }}
                 <span class="likes-text" id="likeCount_{{ comment.pk }}"> | Likes: {{ comment.likes }}</span>
                 <button class="button-post likebtn" onclick="likeComment({{ comment.pk }})">Like</button>
             </div>

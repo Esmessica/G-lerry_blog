@@ -29,8 +29,8 @@ class CommentsForm(forms.ModelForm):
         # Fields that you should be able to edit while commenting
 
         widgets = {
-            'author':forms.TextInput(attrs={'class':'textinputclass'}),
-            'text':forms.Textarea(attrs={'class':'editable medium-editor-textarea textcontent postcontent'})
+            'author':forms.TextInput(attrs={'class': 'textinputclass'}),
+            'text':forms.Textarea(attrs={'class': 'editable medium-editor-textarea textcontent postcontent'})
         }
 
 
