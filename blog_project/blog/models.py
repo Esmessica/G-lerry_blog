@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -51,7 +52,8 @@ class Comments(models.Model):
     approved_comment = models.BooleanField(default=False)
     # By default, says approved comment is not approved,
     # it should be the same name as in approve_comments functions return
-    likes = models.PositiveIntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name='liked_comment', blank=True, null=True)
+    # likes = models.PositiveIntegerField(default=0) old code
 
     def increment_likes(self):
         self.likes += 1

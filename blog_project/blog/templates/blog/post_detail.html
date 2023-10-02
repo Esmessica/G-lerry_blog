@@ -29,18 +29,22 @@
             <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="button-post addcmntbtn">Add comment</a>
         </div>
 
-   <div class="container comment-section">
+    <div class="container comment-section">
         {% for comment in post.comments.all %}
             <div class="comment-one">
                 <br>
                 <p>{{ comment.text|safe|linebreaks }}</p>
                 <p class="posted-by">Posted by: {{ comment.author }}</p>
-                    {{ comment.approve }}
-                <span class="likes-text" id="likeCount_{{ comment.pk }}"> | Likes: {{ comment.likes }}</span>
-                <button class="button-post likebtn" onclick="likeComment({{ comment.pk }})">Like</button>
+                {{ comment.approve }}
+                {% csrf_token %}
+                <span class="likes-text" id="likeCount_{{ comment.pk }}"> | Likes: {{ comment.likes.count }}</span>
+                <button id="likeButton_{{ comment.pk }}" class="button-post likebtn" onclick="likeComment({{ comment.pk }})">Like</button>
+
             </div>
         {% endfor %}
     </div>
+
+
 
 
 <script src="{% static 'js/comments.js' %}"></script>

@@ -1,12 +1,13 @@
 async function likeComment(commentId) {
-    const csrftoken = "{{ csrf_token }}";
+    const csrftoken = getCookie('csrftoken');
 
     try {
         const response = await fetch(`/like_comment/${commentId}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
+                'X-CSRFToken': csrftoken,
+                'X-Requested-With': 'XMLHttpRequest'
             },
             body: JSON.stringify({})
         });
@@ -16,8 +17,17 @@ async function likeComment(commentId) {
         }
 
         const data = await response.json();
-        document.getElementById(`likeCount_${commentId}`).innerText = 'Likes: ' + data.likes;
+        const likeCountElement = document.getElementById(`likeCount_${commentId}`);
+        likeCountElement.innerText = `| Likes: ${data.likes}`;
+        const likeButton = document.getElementById(`likeButton_${commentId}`);
+        likeButton.innerText = data.liked ? 'Unlike' : 'Like';
     } catch (error) {
         console.error('Error:', error.message);
     }
+}
+
+// Function to get CSRF cookie value
+function getCookie(name) {
+    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return cookieValue ? cookieValue.pop() : '';
 }

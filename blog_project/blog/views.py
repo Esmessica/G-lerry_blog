@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Comments
 from blog.forms import PostForm, CommentsForm, RegisterForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -119,13 +120,32 @@ Comments views here
 """
 
 
-@csrf_exempt
-@require_POST
+@login_required
 def like_comment(request, pk):
     comment = get_object_or_404(Comments, pk=pk)
-    comment.increment_likes()
-    likes_count = comment.likes
-    return JsonResponse({'likes': likes_count})
+
+    # Check if the user has already liked the comment
+    if comment.likes.filter(id=request.user.id).exists():
+        # User already liked the comment, so unlike it
+        comment.likes.remove(request.user)
+        liked = False
+    else:
+        # User hasn't liked the comment, so like it
+        comment.likes.add(request.user)
+        liked = True
+
+    likes_count = comment.likes.count()
+    comment.save()
+
+    return JsonResponse({'likes': likes_count, 'liked': liked})
+
+# @csrf_exempt
+# @require_POST
+# def like_comment(request, pk):
+#     comment = get_object_or_404(Comments, pk=pk)
+#     comment.increment_likes()
+#     likes_count = comment.likes
+#     return JsonResponse({'likes': likes_count})
 
 @login_required
 def post_publish(request, pk):
