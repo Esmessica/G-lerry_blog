@@ -127,6 +127,10 @@
     text-shadow: 1px 2px 5px #af99b4;
 }
 
+.note-right{
+    margin-right: 5.5rem;
+}
+
 /* buttons */
 
 .button-container{
@@ -177,4 +181,8 @@
     width: 5rem;
     background-color: #676e97;
     margin-left: 50vw;
+}
+
+.noneuser{
+    background-color: #959595;
 }

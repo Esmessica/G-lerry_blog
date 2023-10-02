@@ -35,11 +35,14 @@
                 <br>
                 <p>{{ comment.text|safe|linebreaks }}</p>
                 <p class="posted-by">Posted by: {{ comment.author }}</p>
-                {{ comment.approve }}
-                {% csrf_token %}
-                <span class="likes-text" id="likeCount_{{ comment.pk }}"> | Likes: {{ comment.likes.count }}</span>
-                <button id="likeButton_{{ comment.pk }}" class="button-post likebtn" onclick="likeComment({{ comment.pk }})">Like</button>
 
+
+                <span class="likes-text" id="likeCount_{{ comment.pk }}"> | Likes: {{ comment.likes.count }}</span>
+                {% if user.is_authenticated %}
+                    <button id="likeButton_{{ comment.pk }}" class="button-post likebtn" onclick="likeComment({{ comment.pk }})">Like</button>
+                {% else %}
+                    <p class="text-end note-right"><em> <a class="text-reset" href="{% url 'login' %}"> Login </a>to add like </em> </p>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
