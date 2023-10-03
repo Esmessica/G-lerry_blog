@@ -35,14 +35,28 @@
                 <br>
                 <p>{{ comment.text|safe|linebreaks }}</p>
                 <p class="posted-by">Posted by: {{ comment.author }}</p>
-
-
                 <span class="likes-text" id="likeCount_{{ comment.pk }}"> | Likes: {{ comment.likes.count }}</span>
-                {% if user.is_authenticated %}
-                    <button id="likeButton_{{ comment.pk }}" class="button-post likebtn" onclick="likeComment({{ comment.pk }})">Like</button>
-                {% else %}
-                    <p class="text-end note-right"><em> <a class="text-reset" href="{% url 'login' %}"> Login </a>to add like </em> </p>
-                {% endif %}
+
+                <div class="text-end note-right">
+
+                    {% if user.is_authenticated %}
+                        <button id="likeButton_{{ comment.pk }}" class="button-post likebtn" onclick="likeComment({{ comment.pk }}, {{ comment.is_liked_by_user|yesno:"true,false" }})">
+                            <span id="likeButtonText_{{ comment.pk }}">
+                                {% if comment.is_liked_by_user %}
+                                    Unlike
+                                {% else %}
+                                    Like
+                                {% endif %}
+                            </span>
+                        </button>
+
+
+
+
+                    {% else %}
+                        <p class="text-end note-right"><em> <a class="text-reset" href="{% url 'login' %}"> Login </a>to add like </em> </p>
+                    {% endif %}
+                </div>
             </div>
         {% endfor %}
     </div>

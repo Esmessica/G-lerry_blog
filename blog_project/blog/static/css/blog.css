@@ -147,8 +147,8 @@
     background: #787878;
     text-align: center;
     margin: 1rem 1rem;
-    padding: 0.5rem 0;
-    width: 15vw;
+    padding: 0.5rem;
+    min-width: 15vw;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
@@ -178,9 +178,9 @@
 }
 
 .likebtn{
-    width: 5rem;
+    min-width: 5rem;
     background-color: #676e97;
-    margin-left: 50vw;
+
 }
 
 .noneuser{

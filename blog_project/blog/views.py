@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from django.contrib import messages
 from django.contrib.auth import login
+from django.db.models import Exists, OuterRef
 
 class CustomLogoutView(LogoutView):
     template_name = 'registration/logout.html'
@@ -45,6 +46,24 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+    template_name = 'blog/post_detail.html'
+
+
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    user = self.request.user
+
+    # Check if the user is authenticated and get the liked comments
+    liked_comments = []
+    if user.is_authenticated:
+        liked_comments = self.object.comments.annotate(
+            is_liked_by_user=Exists(
+                user.liked_comment.filter(id=OuterRef('pk'))
+            )
+        ).values('pk', 'is_liked_by_user')
+
+    context['liked_comments'] = liked_comments
+    return context
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
